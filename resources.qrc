@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/plugins/QuickGeoJson" >
+    <file>quick_geojson.png</file>
+  </qresource>
+</RCC>
