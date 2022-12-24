@@ -4,7 +4,9 @@ description:Quick GeoJSON viewer, this QGIS plugin helps you to load pasted GeoJ
 
 version:1.0
 qgisMinimumVersion:3.0
+category=Plugins
 experimental:False
+homepage=https://github.com/mtrcn/quick-geojson
 repository:https://github.com/mtrcn/quick-geojson
 tracker:https://github.com/mtrcn/quick-geojson/issues
 about:Quick GeoJSON is a plugin to easily load GeoJSON data into QGIS as a temporary layer.
