@@ -18,14 +18,12 @@ import inspect
 # Import the code for the dialog
 from .QuickGeoJsonDialog import QuickGeoJsonDialog
 
-
 class QuickGeoJson(object):
 
     def __init__(self, iface):
         # Save reference to the QGIS interface
         self.iface = iface
         self.canvas = iface.mapCanvas()
-        # TODO: remove: unused
         self.layerNum = 1
         self.typeMap = {
             1: 'Point',
@@ -40,11 +38,11 @@ class QuickGeoJson(object):
         current_directory = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
         self.action = QAction(QIcon(os.path.join(current_directory, "quick_geojson.png")),
              "&Quick GeoJSON", self.iface.mainWindow())
+
         # connect the action to the run method
         self.action.triggered.connect(self.load)
 
         # Add toolbar button and menu item
-
         self.iface.addToolBarIcon(self.action)
         self.iface.addPluginToMenu("QuickGeoJson", self.action)
 
@@ -64,7 +62,7 @@ class QuickGeoJson(object):
         self.iface.removePluginMenu("QuickGeoJson", self.action)
         self.iface.removeToolBarIcon(self.action)
 
-     # run
+    # run
     def load(self):
         # show the dialog
         self.dlg.show()
