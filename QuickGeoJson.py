@@ -40,7 +40,7 @@ class QuickGeoJson(object):
     def initGui(self):
         current_directory = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
         self.action = QAction(QIcon(os.path.join(current_directory, "quick_geojson.png")),
-             "&QuickGeoJson", self.iface.mainWindow())
+             "&Quick GeoJSON", self.iface.mainWindow())
         # connect the action to the run method
         self.action.triggered.connect(self.load)
 
@@ -69,7 +69,6 @@ class QuickGeoJson(object):
     def load(self):
         # show the dialog
         self.dlg.show()
-        self.dlg.adjustSize()
         result = self.dlg.exec_()
         # See if OK was pressed
         if result == 1 and self.dlg.txtGeoJson.toPlainText():
