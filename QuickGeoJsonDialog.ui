@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Quick GeoJSON</class>
+ <class>QuickGeoJSON</class>
  <widget class="QDialog" name="QuickGeoJSON">
   <property name="geometry">
    <rect>

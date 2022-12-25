@@ -7,7 +7,7 @@ from qgis.PyQt.QtWidgets import QDialog
 from qgis.PyQt import uic
 import os
 
-class QuickGeoJsonDialog(QDialog ):
+class QuickGeoJsonDialog(QDialog):
     def __init__(self):
         QDialog.__init__(self)
         # Set up the user interface from Designer.
