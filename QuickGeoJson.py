@@ -1,5 +1,4 @@
 """
-Date                 : 24/12/2022
 Author               : Mete Ercan Pakdil
 """
 
@@ -74,7 +73,8 @@ class QuickGeoJson(object):
         if result == 1 and self.dlg.txtGeoJson.toPlainText():
             txtGeoJson = str(self.dlg.txtGeoJson.toPlainText())
             layerName = self.dlg.txtLayerName.text() or 'QuickGeoJson'
-            features = QgsJsonUtils.stringToFeatureList(txtGeoJson)
+            fields = QgsJsonUtils.stringToFields(txtGeoJson)
+            features = QgsJsonUtils.stringToFeatureList(txtGeoJson, fields)
             layers = {}
             for feature in features:
                 wkbType = feature.geometry().wkbType()
@@ -84,7 +84,7 @@ class QuickGeoJson(object):
                 geomType = self.typeMap[wkbType]
                 layer = None
                 if not geomType in layers:
-                    layer = self.createLayer(geomType, layerName + ' - ' + geomType)
+                    layer = self.createLayer(geomType, layerName + ' - ' + geomType, fields)
                     layers[geomType] = layer
                     QgsMessageLog.logMessage("New layer created for the new geometry type (%s)" % geomType, 'QuickGeoJson', level=Qgis.Info)
                 else:
@@ -96,12 +96,13 @@ class QuickGeoJson(object):
             self.canvas.refresh()
             return
 
-    def createLayer(self, geometryType, layerName):
+    def createLayer(self, geometryType, layerName, fields):
         crs = self.canvas.mapSettings().destinationCrs()
 
         typeString = "%s?crs=%s" % (geometryType, crs.authid())
 
         layer = QgsVectorLayer(typeString.lower(), layerName, "memory")
+        layer.dataProvider().addAttributes(fields)
 
         registry = QgsProject.instance()
 
@@ -113,12 +114,6 @@ class QuickGeoJson(object):
         layer.updateExtents()
         layer.reload()
         self.canvas.refresh()
-
-    def constraintMessage(self, message):
-        """return a shortened version of the message"""
-        if len(message) > 128:
-            message = message[:64] + ' [ .... ] ' + message[-64:]
-        return message
 
 
 if __name__ == "__main__":
